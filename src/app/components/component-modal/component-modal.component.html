@@ -1,0 +1,52 @@
+<div class="container pt-4">
+  <div class="card border-0 text-center">
+    <div class="card-body">
+      <h6>{{actionModal}} Pokemon</h6>
+      <form class="mt-4" [formGroup]="formPokemon" autocomplete="off" (ngSubmit)="savePokemon(mensajeModalError)">
+        <table class="table table-borderless">
+          <tbody>
+          <tr>
+            <input type="number" class="form-control" id="id" formControlName="id" hidden>
+            <td><label for="name" class="col-xs-4">Nombre: </label></td>
+            <td><input type="text" class="form-control" id="name" formControlName="name"></td>
+            <td><label for="attack" class="col-xs-4">Ataque: </label></td>
+            <td>0<input type="range" class="slider" min="0" max="100" id="attack" formControlName="attack">100</td>
+          </tr>
+          <tr>
+            <td><label for="image" class="col-xs-4">Imagen: </label></td>
+            <td><input type="text" class="form-control" id="image" formControlName="image" placeholder="url"></td>
+            <td><label for="defense" class="col-xs-4">Defensa: </label></td>
+            <td>0<input type="range" class="slider" min="0" max="100" id="defense" formControlName="defense">100</td>
+          </tr>
+        </table>
+        <div class="mt-3">
+          <button [disabled] = "formPokemon.invalid" type="submit" class="btn btn-primary mr-3" >
+            <i class="far fa-save"></i> Guardar
+          </button>
+          <button type="button" class="btn btn-primary" (click)="activeModal.dismiss('Close click')">
+            <i class="fas fa-times"></i> Cancelar
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<ng-template #mensajeModalError let-modal>
+  <div class="modal-error">
+    <div>
+      <div class="cols cols2 align-middle">
+        <div class="align-left">
+          <img src="./assets/images/warning.svg" width="42" />
+          <p>{{ errorMessage }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="align-right">
+      <button
+        class="btn btn-solid-white"
+        (click)="modal.close('Cancelar click')">
+        Aceptar
+      </button>
+    </div>
+  </div>
+</ng-template>

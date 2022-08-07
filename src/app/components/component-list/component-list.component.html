@@ -1,0 +1,75 @@
+<div class="container mt-4">
+    <div class="card">
+      <div class="card-body">
+        <span class="h6"> Listado de Pokemon</span>
+        <table style="width: 100%">
+          <tr >
+            <td style="width: 20% ;align-items: start">
+              <input type="text" class="form-control" id="buscador" #buscador
+                     (input)="search(buscador.value)" style="font-family: Arial, 'Font Awesome 5 Free'"
+                     placeholder="&#xF002; Buscar">
+            </td>
+            <td style="text-align: end">
+                <button type="button" class="btn btn-primary" (click)="openModal('Nuevo', undefined)">
+                <i class="fas fa-plus"></i> Nuevo
+              </button>
+            </td>
+          </tr>
+        </table>
+        <table class="table table-bordered mt-3">
+          <thead>
+          <tr class="text-center" >
+            <th scope="col">Nombre</th>
+            <th scope="col">Imagen</th>
+            <th scope="col">Ataque</th>
+            <th scope="col">Defensa</th>
+            <th scope="col">Acciones</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let pokemon of pokemons | paginate: {itemsPerPage: 5, currentPage: pageActual}">
+            <td>{{pokemon.name}}</td>
+            <td class="text-center"><img src="{{pokemon.image}}" width="70" height="70"/></td>
+            <td>{{pokemon.attack}}</td>
+            <td>{{pokemon.defense}}</td>
+            <td class="text-center">
+              <i class="fas fa-edit fa-lg mr-5" style="color: blueviolet;"
+                 (click)="openModal('Editar',pokemon)"></i>
+              <i class="fas fa-trash-alt fa-lg ml-5" style="color: rgb(226, 43, 43)"
+                 (click)="deletePokemon(pokemon.id, mensajeModalError)"></i>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+        <pagination-controls class="my-pagination align-content-center label" previousLabel="Previous"
+                             nextLabel="Next" screenReaderPaginationLabel="Pagination" screenReaderPageLabel="page"
+                             (pageChange)="pageActual = $event"></pagination-controls>
+      </div>
+    </div>
+</div>
+<ng-template #mensajeModalError let-modal>
+    <div class="modal-error">
+      <div>
+        <div class="cols cols2 align-middle">
+          <div class="align-left">
+            <img src="./assets/images/warning.svg" width="42" />
+            <p>{{ errorMessage }}</p>
+          </div>
+        </div>
+      </div>
+      <div class="align-right">
+        <button
+          class="btn btn-solid-white"
+          (click)="modal.close('Cancelar click')">
+          Aceptar
+        </button>
+      </div>
+    </div>
+</ng-template>
+<ngb-alert
+  *ngIf="successMessage"
+  type="success"
+  class="wbtn-success"
+  (close)="successMessage"><img src="./assets/images/success.svg" />
+  <span>{{successMessage}}</span>
+</ngb-alert>
