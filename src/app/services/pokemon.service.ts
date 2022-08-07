@@ -9,6 +9,7 @@ import {Observable, of, Subject} from 'rxjs';
 export class PokemonService {
 
   pokemonCambio = new Subject<Pokemon[]>();
+  mensajeCambio = new Subject<string>();
 
   httpOptions = {
     headers: new HttpHeaders({
@@ -26,8 +27,6 @@ export class PokemonService {
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       console.error(error);
-      // console.log(`${operation} failed: ${error.message}`);
-
       return of(result as T);
     };
   }
@@ -54,6 +53,7 @@ export class PokemonService {
   public deletePokemon(idPokemon: number) {
     return this.http.delete(this.getQuery(`${idPokemon}`));
   }
+  
 }
 
 export class Pokemon {

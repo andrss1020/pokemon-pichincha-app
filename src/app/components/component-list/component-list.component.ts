@@ -28,7 +28,10 @@ export class ComponentListComponent implements OnInit {
     this.pokemonService.pokemonCambio.subscribe(data => {
       this.pokemons = data;
       this.pokemonsAux = this.pokemons;
-    })
+    });
+    this.pokemonService.mensajeCambio.subscribe(data => {
+      this.successMessage = data;
+    });
     this.pokemons = this.getPokeons();
   }
 

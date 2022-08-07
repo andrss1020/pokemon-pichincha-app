@@ -50,8 +50,9 @@ export class ComponentModalComponent implements OnInit {
                 this.modalService.dismissAll();
                 this.pokemonService.getPokemons().subscribe((pokemones :any) => {
                   this.pokemonService.pokemonCambio.next(pokemones);
+                  this.pokemonService.mensajeCambio.next('Proceso ejecutado con éxito');
                 });
-                this.successMessage = 'Proceso ejecutado con éxito';
+                //this.successMessage = 'Proceso ejecutado con éxito';
               } else {
                 this.modalService.open(error, {
                   windowClass: 'custom-width-error-modal',
@@ -68,8 +69,9 @@ export class ComponentModalComponent implements OnInit {
                 this.modalService.dismissAll();
                 this.pokemonService.getPokemons().subscribe((pokemones :any) => {
                   this.pokemonService.pokemonCambio.next(pokemones);
+                  this.pokemonService.mensajeCambio.next('Proceso ejecutado con éxito');
                 });
-                this.successMessage = 'Proceso ejecutado con éxito';
+                //this.successMessage = 'Proceso ejecutado con éxito';
               } else {
                 this.modalService.open(error, {
                   windowClass: 'custom-width-error-modal',
